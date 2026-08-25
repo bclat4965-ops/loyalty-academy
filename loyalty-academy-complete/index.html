@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loyalty Academy</title>
+  <meta name="description" content="Loyalty Academy learning portal for students and teachers." />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" onclick="showView('home'); return false;">
+      <span class="brand-mark">L</span>
+      <span>Loyalty Academy</span>
+    </a>
+    <nav id="nav" class="nav"></nav>
+  </header>
+
+  <main>
+    <section id="homeView" class="view">
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">LEARN • GROW • LEAD</span>
+          <h1>A school community built around <span>loyalty and learning.</span></h1>
+          <p>Loyalty Academy brings students and teachers together in one welcoming digital school space.</p>
+          <div class="actions">
+            <button class="btn primary" onclick="openAuth('signup')">Create an account</button>
+            <button class="btn secondary" onclick="openAuth('login')">Log in</button>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-icon">🎓</div>
+          <h2>Welcome to Loyalty Academy</h2>
+          <p>Access classes, assignments, resources and your school profile from one simple portal.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-heading">
+          <span class="eyebrow">ABOUT US</span>
+          <h2>More than a school</h2>
+          <p>We aim to create a respectful, curious and supportive learning environment.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature"><div>📚</div><h3>Quality learning</h3><p>Organized classes and learning resources for students.</p></article>
+          <article class="feature"><div>🌱</div><h3>Personal growth</h3><p>Encouraging confidence, curiosity and responsibility.</p></article>
+          <article class="feature"><div>🤝</div><h3>Community</h3><p>Students and teachers working together toward shared goals.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="authView" class="view hidden">
+      <div class="auth-shell">
+        <div class="auth-info">
+          <span class="eyebrow">LOYALTY ACADEMY</span>
+          <h1>Your learning journey starts here.</h1>
+          <p>Choose your account type, create your account, and access your school portal.</p>
+        </div>
+        <div class="auth-card">
+          <div class="tabs">
+            <button id="loginTab" class="tab active" onclick="setAuthMode('login')">Log in</button>
+            <button id="signupTab" class="tab" onclick="setAuthMode('signup')">Sign up</button>
+          </div>
+
+          <div class="role-switch">
+            <button id="studentRole" class="role active" onclick="setRole('student')">🎓 Student</button>
+            <button id="teacherRole" class="role" onclick="setRole('teacher')">👩‍🏫 Teacher</button>
+          </div>
+
+          <form id="authForm" onsubmit="handleAuth(event)">
+            <div id="nameField" class="field hidden">
+              <label for="fullName">Full name</label>
+              <input id="fullName" type="text" autocomplete="name" placeholder="Your full name" />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+            </div>
+            <div class="field">
+              <label for="password">Password</label>
+              <input id="password" type="password" autocomplete="current-password" placeholder="At least 6 characters" minlength="6" required />
+            </div>
+            <button id="authSubmit" class="btn primary full" type="submit">Log in</button>
+          </form>
+
+          <p id="authMessage" class="message"></p>
+          <p class="switch-text"><span id="switchPrompt">Don't have an account?</span> <button class="link-button" onclick="toggleAuthMode()">Sign up</button></p>
+          <button class="back-link" onclick="showView('home')">← Back to home</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="dashboardView" class="view hidden">
+      <div class="dashboard-header">
+        <div>
+          <span class="eyebrow" id="dashboardEyebrow">DASHBOARD</span>
+          <h1 id="dashboardTitle">Welcome</h1>
+          <p id="dashboardSubtitle"></p>
+        </div>
+        <button class="btn secondary" onclick="signOut()">Log out</button>
+      </div>
+
+      <div id="dashboardContent"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <footer>
+    <div><strong>Loyalty Academy</strong><span>Learn. Grow. Lead.</span></div>
+    <p>© <span id="year"></span> Loyalty Academy.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
