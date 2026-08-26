@@ -2,7 +2,7 @@
    1) Replace SUPABASE_URL and SUPABASE_ANON_KEY.
    2) Run schema.sql in Supabase SQL Editor.
 */
-const SUPABASE_URL = "https://aacxapuousgddxjvnpfl.supabase.co/rest/v1/";
+const SUPABASE_URL = "https://aacxapuousgddxjvnpfl.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFhY3hhcHVvdXNnZGR4anZucGZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc2MjYzNjQsImV4cCI6MjEwMzIwMjM2NH0.FRBNADPv8lKnw5dA7WO3kYo_2veC3qbDBVZSn6eGcDU";
 
 let supabaseClient = null;
