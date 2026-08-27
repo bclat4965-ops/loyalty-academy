@@ -109,11 +109,17 @@ async function handleAuth(e) {
 
   if (authMode === "signup") {
     if (!fullName) return setMessage("Please enter your full name.", true);
-    const { data, error } = await supabaseClient.auth.signUp({
-      email,
-      password,
-      options: { data: { full_name: fullName, requested_role: selectedRole } }
-    });
+const { data, error } = await supabaseClient.auth.signUp({
+  email,
+  password,
+  options: {
+    emailRedirectTo: "https://loyalty-academy.vercel.app/",
+    data: {
+      full_name: fullName,
+      requested_role: selectedRole
+    }
+  }
+});
     if (error) return setMessage(error.message, true);
 
     if (data.session) {
