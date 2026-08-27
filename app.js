@@ -146,11 +146,32 @@ function setMessage(text, error=false) {
 }
 
 async function loadProfile() {
-  if (!supabaseClient || !currentUser) return;
-  const { data, error } = await supabaseClient.from("profiles").select("*").eq("id", currentUser.id).single();
-  if (!error) currentProfile = data;
-}
+  if (!supabaseClient || !currentUser) return false;
 
+  const { data, error } = await supabaseClient
+    .from("profiles")
+    .select("*")
+    .eq("id", currentUser.id)
+    .maybeSingle();
+
+  if (error) {
+    console.error("Profile loading error:", error);
+    setMessage("There was a problem loading your account: " + error.message, true);
+    return false;
+  }
+
+  if (!data) {
+    console.error("No profile found for user:", currentUser.id);
+    setMessage(
+      "Your account was verified, but your student profile has not been created yet.",
+      true
+    );
+    return false;
+  }
+
+  currentProfile = data;
+  return true;
+}
 async function showDashboard() {
   if (!currentUser) return openAuth("login");
   if (!currentProfile) await loadProfile();
